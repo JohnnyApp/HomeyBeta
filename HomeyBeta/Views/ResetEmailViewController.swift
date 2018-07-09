@@ -126,10 +126,13 @@ class ResetEmailViewController: UIViewController,UITextFieldDelegate {
     }
     
     func SuccessfulEmailSending() {
-        let alert = UIAlertController(title: "Password Reset", message: "An email was sent. Please follow the instructions to reset your password.", preferredStyle: .alert)
+        /*let alert = UIAlertController(title: "Password Reset", message: "An email was sent. Please follow the instructions to reset your password.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true)
-        resetForm()
+        resetForm()*/
+        //Put in Alert Message
+        
+        self.dismiss(animated: false, completion: nil)
     }
     
     func resetForm() {
