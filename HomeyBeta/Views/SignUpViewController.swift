@@ -31,7 +31,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadViewData()
     }
     
     @objc func openImagePicker(_ sender:Any) {
@@ -164,9 +163,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.loadViewData()
                 print("Error Creating User: \(error!.localizedDescription)")
             }
-            
         }
-        
     }
     
     func uploadProfileImage(_ image:UIImage, completion: @escaping ((_ url:URL?)->())) {

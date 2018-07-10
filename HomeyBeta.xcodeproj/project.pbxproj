@@ -23,6 +23,7 @@
 		DF3BA7C320E9BEAD000D3AAD /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3BA7C220E9BEAD000D3AAD /* UserProfile.swift */; };
 		DF3BA7C520E9BEEC000D3AAD /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3BA7C420E9BEEC000D3AAD /* UserService.swift */; };
 		DF3BA7C720EA0155000D3AAD /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3BA7C620EA0155000D3AAD /* ImageService.swift */; };
+		DF6B042220F467B50004DF07 /* messageHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6B042120F467B50004DF07 /* messageHandlers.swift */; };
 		DF6EA35720DA1D1200415756 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF6EA35620DA1D1200415756 /* GoogleService-Info.plist */; };
 		DF855BBA20DC858C007E017B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF855BB920DC858C007E017B /* LoginViewController.swift */; };
 		DF855BBC20DC859C007E017B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF855BBB20DC859C007E017B /* SignUpViewController.swift */; };
@@ -76,6 +77,7 @@
 		DF3BA7C220E9BEAD000D3AAD /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		DF3BA7C420E9BEEC000D3AAD /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		DF3BA7C620EA0155000D3AAD /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		DF6B042120F467B50004DF07 /* messageHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageHandlers.swift; sourceTree = "<group>"; };
 		DF6EA35620DA1D1200415756 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF855BB920DC858C007E017B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DF855BBB20DC859C007E017B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				DF9A2CD520DCC1A50079A69F /* RoundedWhiteButton.swift */,
 				DFFA31B220E0349A00069813 /* HelperExtensions.swift */,
+				DF6B042120F467B50004DF07 /* messageHandlers.swift */,
 			);
 			name = Helpers;
 			path = Views/Helpers;
@@ -496,6 +499,7 @@
 				DF389D2C20E8AECC00720CD7 /* HomeMainTableViewCell.swift in Sources */,
 				DF3BA7C120E9B2E4000D3AAD /* HomePostViewController.swift in Sources */,
 				DF3AD5A520EB2A450030C69E /* HomeSelectionViewController.swift in Sources */,
+				DF6B042220F467B50004DF07 /* messageHandlers.swift in Sources */,
 				DF3BA7C720EA0155000D3AAD /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

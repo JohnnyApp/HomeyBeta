@@ -29,10 +29,6 @@ class MainViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
             return .lightContent

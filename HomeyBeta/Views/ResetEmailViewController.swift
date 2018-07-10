@@ -15,6 +15,7 @@ class ResetEmailViewController: UIViewController,UITextFieldDelegate {
     
     var continueButton:RoundedWhiteButton!
     var activityView:UIActivityIndicatorView!
+    var messagehandler = messageHandler()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,13 +127,10 @@ class ResetEmailViewController: UIViewController,UITextFieldDelegate {
     }
     
     func SuccessfulEmailSending() {
-        /*let alert = UIAlertController(title: "Password Reset", message: "An email was sent. Please follow the instructions to reset your password.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true)
-        resetForm()*/
         //Put in Alert Message
-        
-        self.dismiss(animated: false, completion: nil)
+        messagehandler.resetPasswordHandler = true
+        goToLoginScreen()
+        //self.dismiss(animated: false, completion: nil)
     }
     
     func resetForm() {
@@ -140,6 +138,11 @@ class ResetEmailViewController: UIViewController,UITextFieldDelegate {
         activityView.stopAnimating()
         self.setContinueButton(enabled: true)
         continueButton.setTitle("Continue", for: .normal)
+    }
+    
+    func goToLoginScreen() {
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! UIViewController
+        self.present(loginViewController, animated: true)
     }
     
     @IBAction func backToLogin(_ sender: Any) {

@@ -21,27 +21,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        // Override point for customization after application launch.
         
         let authListener = Auth.auth().addStateDidChangeListener { auth, user in
             
+            //try! Auth.auth().signOut()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            if (user != nil) {
+            //if (user != nil) {
+            Auth.auth().currentUser?.reload()
+            if (user != nil) && (user?.isEmailVerified == true) {
                 UserService.observeUserProfile(user!.uid) { userProfile in
                     UserService.currentUserProfile = userProfile
                 }
                 let controller = storyboard.instantiateViewController(withIdentifier: "HomeSelectionViewController") as! UINavigationController
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
+                print("GO TO HOME SELECTION")
             } else {
                 UserService.currentUserProfile = nil
                 let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
+                print("GO TO LOGIN")
             }
         }
-        
+        print("RETURNING TRUE!!")
         return true
     }
     
