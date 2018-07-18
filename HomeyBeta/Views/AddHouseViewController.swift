@@ -56,7 +56,7 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
 
         // Firebase code here
         
-        let postRef = Database.database().reference().child("posts").childByAutoId()
+        let postRef = Database.database().reference().child("houses").childByAutoId()
         
         let postObject = [
             "users": [
@@ -114,7 +114,7 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
     }
     
     func uploadHouseProfileImage(_ image:UIImage, completion: @escaping ((_ url:URL?)->())) {
-        /*guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         let storageRef = Storage.storage().reference().child("user/\(uid)")
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.75) else { return }
@@ -134,7 +134,7 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
                 // failed
                 completion(nil)
             }
-        }*/
+        }
     }
     
     func loadViewData() {

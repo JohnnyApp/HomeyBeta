@@ -127,10 +127,7 @@ class ResetEmailViewController: UIViewController,UITextFieldDelegate {
     }
     
     func SuccessfulEmailSending() {
-        //Put in Alert Message
-        messagehandler.resetPasswordHandler = true
         goToLoginScreen()
-        //self.dismiss(animated: false, completion: nil)
     }
     
     func resetForm() {
