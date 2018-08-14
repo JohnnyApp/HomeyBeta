@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 
 class HomeSelectionViewController: UIViewController {
+    
+    var tableView:UITableView!
+    var houses = [HomePost]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

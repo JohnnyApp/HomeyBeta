@@ -24,11 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let authListener = Auth.auth().addStateDidChangeListener { auth, user in
             
-            //try! Auth.auth().signOut()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            //if (user != nil) {
-            Auth.auth().currentUser?.reload()
             if (user != nil) && (user?.isEmailVerified == true) {
                 UserService.observeUserProfile(user!.uid) { userProfile in
                     UserService.currentUserProfile = userProfile

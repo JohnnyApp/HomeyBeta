@@ -30,6 +30,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var imagePicker:UIImagePickerController!
     
     override func viewDidLoad() {
+        self.loadViewData()
         super.viewDidLoad()
     }
     
@@ -200,17 +201,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         } else {
             usrname = username
         }
-        
-        let userObject = [
-            "Username": usrname,
-            "FirstName": firstname,
-            "LastName": lastname,
-            "DateOfBirth": DOB,
-            "type": "tenant",
-            "PhotoURL": profileImageURL.absoluteString
+        let userProfileObject = [
+            "username": username,
+            "photoURL": profileImageURL.absoluteString
             ] as [String:Any]
         
-        databaseRef.setValue(userObject) { error, ref in
+        databaseRef.setValue(userProfileObject) { error, ref in
             completion(error == nil)
         }
     }

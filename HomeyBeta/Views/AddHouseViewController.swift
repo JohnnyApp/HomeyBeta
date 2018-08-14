@@ -45,46 +45,64 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func CreateHouse() {
-        guard let userProfile = UserService.currentUserProfile else { return }
+        guard let userProfile = UserService.currentUserProfile else {return}
+        let houseAdd2 = houseAddress2Txt.text
         guard let houseName = houseNameTxt.text else {return}
         guard let houseAdd1 = houseAddress1Txt.text else {return}
-        guard let houseAdd2 = houseAddress2Txt.text else {return}       //Potential Issue???
-        guard let houseCity = houseCityTxt.text else {return}
         guard let houseState = houseStateTxt.text else {return}
+        guard let houseCity = houseCityTxt.text else {return}
         guard let houseZipCode = houseZipCodeTxt.text else {return}
         guard let image = homeProfileImage.image else { return }
-
+        
+        setContinueButton(enabled: false)
+        continueButton.setTitle("", for: .normal)
+        activityView.startAnimating()
         // Firebase code here
         
         let postRef = Database.database().reference().child("houses").childByAutoId()
         
         let postObject = [
             "users": [
-                "uid": userProfile.uid,
-                "username": userProfile.username,
-                "photoURL": userProfile.photoURL.absoluteString
+                userProfile.uid: [
+                    "username": userProfile.username,
+                    "photoURL": userProfile.photoURL.absoluteString
+                ]
             ],
             "houseName": houseName,
             "houseAddress1": houseAdd1,
-            "houseAddress2": houseAdd2,
+            "houseAddress2": houseAdd2 ?? "",
             "houseCity": houseCity,
             "houseState": houseState,
             "houseZipCode": houseZipCode
             ] as [String:Any]
-        
-        self.uploadHouseProfileImage(image) { url in
-            if url != nil {
-                postRef.setValue(postObject, withCompletionBlock: { error, ref in
-                    if error == nil {
-                        self.dismiss(animated: true, completion: nil)
-                    } else {
-                        let alert = UIAlertController(title: "Error", message: "There was an error creating the house", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+        postRef.setValue(postObject, withCompletionBlock: { error, ref in
+            if error == nil {
+                let key = ref.key
+                print("KEY: " + key)
+                self.uploadHouseProfileImage(image,uid: key) { url in
+                    if url != nil {
+                        self.setUserHouseRelationship(houseid: key, houseName: houseName)
                     }
-                })
+                }
+            } else {
+                let alert = UIAlertController(title: "Error", message: "There was an error creating the house", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
-        }
+        })
+    }
+    
+    func setUserHouseRelationship(houseid: String, houseName: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let updateUserRef = Database.database().reference().child("users/profile/\(uid)/houses")
+        
+        let updateObject = [
+                houseid: [
+                    "houseName": houseName
+                ]
+            ] as [String:Any]
+        updateUserRef.updateChildValues(updateObject)
+        self.dismiss(animated: true, completion: nil)
     }
 
     @objc func openImagePicker(_ sender:Any) {
@@ -94,7 +112,6 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldChanged(_ target:UITextField) {
         let housename = houseNameTxt.text
         let houseadd1 = houseAddress1Txt.text
-        //let houseadd2 = houseAddress2Txt.text
         let housecity = houseCityTxt.text
         let housestate = houseStateTxt.text
         let housezipcode = houseZipCodeTxt.text
@@ -113,9 +130,8 @@ class AddHouseViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func uploadHouseProfileImage(_ image:UIImage, completion: @escaping ((_ url:URL?)->())) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let storageRef = Storage.storage().reference().child("user/\(uid)")
+    func uploadHouseProfileImage(_ image:UIImage, uid:String, completion: @escaping ((_ url:URL?)->())) {
+        let storageRef = Storage.storage().reference().child("house/\(uid)")
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.75) else { return }
         

@@ -103,12 +103,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         activityView.startAnimating()
         
         Auth.auth().signIn(withEmail: email, password: pass) { user, error in
-            
             if (error == nil) && (user != nil) {
-                Auth.auth().currentUser?.reload()
                 if user?.isEmailVerified == false {
                     self.resetForm(ErrorMsg: "Please verify your email before continuing")
                 } else {
+                    print("User ID: " + user!.uid)
+                    UserService.observeUserProfile(user!.uid) { userProfile in
+                        print("Go into User Service")
+                        UserService.currentUserProfile = userProfile
+                    }
                     self.goToHomeSelection()
                 }
             } else {

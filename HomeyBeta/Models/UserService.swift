@@ -15,7 +15,6 @@ class UserService {
     
     static func observeUserProfile(_ uid:String, completion: @escaping ((_ userProfile:UserProfile?)->())) {
         let userRef = Database.database().reference().child("users/profile/\(uid)")
-        
         userRef.observe(.value, with: { snapshot in
             var userProfile:UserProfile?
             
@@ -23,7 +22,6 @@ class UserService {
                 let username = dict["username"] as? String,
                 let photoURL = dict["photoURL"] as? String,
                 let url = URL(string:photoURL) {
-                
                 userProfile = UserProfile(uid: snapshot.key, username: username, photoURL: url)
             }
             
